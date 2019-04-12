@@ -15,6 +15,7 @@ Route::get('/login', 'AuthController@index')->name('login');
 
 Route::get('/','HomeController@index');
 Route::get('/mahasiswa','MahasiswaController@index');
+Route::post('/mahasiswa/create', 'MahasiswaController@create');
 Route::get('/mahasiswa/{id_mhs}/edit','MahasiswaController@edit');
 Route::get('/mahasiswa/{id_mhs}/delete','MahasiswaController@delete');
 

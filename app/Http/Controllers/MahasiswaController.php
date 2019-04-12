@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Symfony\Component\VarDumper\Caster\RedisCaster;
 
 class MahasiswaController extends Controller
 {
@@ -28,6 +29,22 @@ class MahasiswaController extends Controller
         $mhs->update($request->all());
 
         return redirect('/mahasiswa')->with('sukses','Data Berhasil Diupdated');
+    }
+
+    public function create(Request $request)
+    {
+        $user = new \App\User();
+        $user->role = 'Mahasiswa';
+        $user->name = $request->nim;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->remember_token = str_random(60);
+        $user->save();
+
+        $request->request->add(['user_id' => $user->id]);
+        $request->merge(['password' => $user->password]);
+        \App\Mahasiswa::create($request->all());
+        return redirect('/mahasiswa')->with('sukses','Data Berhasil Diinput');
     }
 
     public function delete($id_mhs)

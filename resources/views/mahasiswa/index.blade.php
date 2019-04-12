@@ -63,20 +63,20 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form  action="/mahasiswa/create" method="POST">
                     {{csrf_field()}}
                     <div class="form-group">
                         <label for="exampleInputEmail1">NIM</label>
-                        <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter NIM">
+                        <input name="nim" type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter NIM">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                        <small class="form-text text-muted">We'll never share your email with anyone else.</small>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                     </div>
             </div>
             <div class="modal-footer">
