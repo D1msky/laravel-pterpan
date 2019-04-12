@@ -25,7 +25,7 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" value="{{$user->password}}">
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" value="{{$mhs->password}}">
                 </div>
                 <button class="btn btn-primary float-right">Submit</button>
             </form>

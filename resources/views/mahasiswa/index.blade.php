@@ -29,6 +29,7 @@
                         <tr>
                             <th>NIM</th>
                             <th>Email</th>
+                            <th>Password</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -37,6 +38,7 @@
                         <tr>
                             <td>{{$data->nim}}</td>
                             <td>{{$data->email}}</td>
+                            <td>{{$data->password}}</td>
                             <td>
                                 <a href="/mahasiswa/{{$data->id_mhs}}/edit"><button class="btn btn-warning">Edit</button></a>
                                 <a href="/mahasiswa/{{$data->id_mhs}}/delete"><button class="btn btn-danger">Delete</button></a>

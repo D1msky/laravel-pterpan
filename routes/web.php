@@ -17,6 +17,9 @@ Route::get('/','HomeController@index');
 Route::get('/mahasiswa','MahasiswaController@index');
 Route::get('/mahasiswa/{id_mhs}/edit','MahasiswaController@edit');
 Route::get('/mahasiswa/{id_mhs}/delete','MahasiswaController@delete');
+
+Route::get('/users','UserController@index');
+
 Route::get('/dosen','DosenController@index');
 Route::get('/skripsi','SkripsiController@index');
 Route::get('/catatan', 'SkripsiController@catatan');

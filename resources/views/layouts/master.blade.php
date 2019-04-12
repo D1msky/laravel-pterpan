@@ -70,6 +70,12 @@
           <i class="fas fa-fw fa-users"></i>
           <span>Dosen</span></a>
       </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/users">
+          <i class="fas fa-fw fa-users"></i>
+          <span>Users</span></a>
+      </li>
   
       <!-- Divider -->
       <hr class="sidebar-divider">

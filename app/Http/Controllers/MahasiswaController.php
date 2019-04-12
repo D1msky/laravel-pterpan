@@ -15,19 +15,27 @@ class MahasiswaController extends Controller
     public function edit($id_mhs)
     {
         $mhs = \App\Mahasiswa::find($id_mhs);
-        $user = \App\User::find($mhs->user_id);
-        return view('mahasiswa.edit',['mhs' => $mhs, 'user' => $user]); 
+        return view('mahasiswa.edit',['mhs' => $mhs]); 
     }
 
     public function update(Request $request,$id_mhs)
     {
-        return "update";
+        $mhs = \App\Mahasiswa::find($id_mhs);
+        $usr = \App\User::find($mhs->user_id);
+        $usr->email = $request->email;
+        $usr->password = $request->password;
+        $usr-save();
+        $mhs->update($request->all());
+
+        return redirect('/mahasiswa')->with('sukses','Data Berhasil Diupdated');
     }
 
     public function delete($id_mhs)
     {
         $mhs = \App\Mahasiswa::find($id_mhs);
+        $usr = \App\User::find($mhs->user_id);
         $mhs->delete();
+        $usr->delete();
         return redirect('/mahasiswa')->with('sukses','Data Berhasil Dihapus !');
     }
 }
