@@ -26,7 +26,6 @@
                             <th>Email</th>
                             <th>Password</th>
                             <th>Role</th>
-                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -35,10 +34,6 @@
                             <td>{{$data->email}}</td>
                             <td>{{$data->password}}</td>
                             <td>{{$data->role}}</td>
-                            <td>
-                                <a href="/mahasiswa/{{$data->id_mhs}}/edit"><button class="btn btn-warning">Edit</button></a>
-                                <a href="/mahasiswa/{{$data->id_mhs}}/delete"><button class="btn btn-danger">Delete</button></a>
-                            </td>
                         </tr>
                         @endforeach
                     </tbody>
