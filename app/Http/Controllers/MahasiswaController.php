@@ -23,19 +23,23 @@ class MahasiswaController extends Controller
     {
         $mhs = \App\Mahasiswa::find($id_mhs);
         $usr = \App\User::find($mhs->user_id);
+        $usr->name = $request->nama;
         $usr->email = $request->email;
-        $usr->password = $request->password;
-        $usr-save();
+        if($request->password != $mhs->password){
+            $usr->password = bcrypt($request->password);
+            $request->merge(['password' => $usr->password]);
+        }
+        $usr->save();
         $mhs->update($request->all());
 
-        return redirect('/mahasiswa')->with('sukses','Data Berhasil Diupdated');
+        return redirect('/mahasiswa')->with('sukses','Data Mahasiswa Berhasil Diupdated');
     }
 
     public function create(Request $request)
     {
         $user = new \App\User();
         $user->role = 'Mahasiswa';
-        $user->name = $request->nim;
+        $user->name = $request->nama;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->remember_token = str_random(60);
@@ -44,7 +48,7 @@ class MahasiswaController extends Controller
         $request->request->add(['user_id' => $user->id]);
         $request->merge(['password' => $user->password]);
         \App\Mahasiswa::create($request->all());
-        return redirect('/mahasiswa')->with('sukses','Data Berhasil Diinput');
+        return redirect('/mahasiswa')->with('sukses','Data Mahasiswa Berhasil Diinput');
     }
 
     public function delete($id_mhs)
@@ -53,6 +57,6 @@ class MahasiswaController extends Controller
         $usr = \App\User::find($mhs->user_id);
         $mhs->delete();
         $usr->delete();
-        return redirect('/mahasiswa')->with('sukses','Data Berhasil Dihapus !');
+        return redirect('/mahasiswa')->with('sukses','Data Mahasiswa Berhasil Dihapus !');
     }
 }

@@ -1,5 +1,13 @@
 @extends('layouts.master')
 
+
+@section('alert')
+@if(session('sukses'))
+    <div class="alert alert-success" role="alert">
+    {{session('sukses')}}
+    </div>
+@endif
+@endsection
 @section('judul')
 <h1 class="h3 mb-0 text-gray-800">Pengajuan</h1>
 @endsection
@@ -8,7 +16,7 @@
 <div class="col-12">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Pengajuan Judul Skripsi</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Pengajuan Judul Skripsi {{$pengajuan[1]->dosen->nama}}</h6>
         </div>
         <div class="card-body">
             <button type="button" class="btn btn-primary float-right btn-sm" data-toggle="modal" data-target="#exampleModal">
@@ -28,36 +36,19 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($pengajuan as $pengajuan)
                         <tr>
-                            <td>Sistem Informasi Bank Sampah</td>
-                            <td>Lussy</td>
-                            <td><button class="btn btn-warning">Diproses</button></td>
-                            <td>-</td>
-                            <td>-</td>
+                            <td>{{$pengajuan->judul}}</td>
+                            <td>{{$pengajuan->id_dosen}}</td>
+                            <td><button class="btn btn-warning">{{$pengajuan->status}}</button></td>
+                            <td>{{$pengajuan->tgl_acc}}</td>
+                            <td>{{$pengajuan->tgl_selesai}}</td>
                             <td>
-                                <a href=""><button class="btn btn-warning">Edit</button></a>
+                                <a href="/pengajuan/{{$pengajuan->id_pengajuan}}/edit"><button class="btn btn-warning">Edit</button></a>
                             </td>
                         </tr>
-                        <tr>
-                            <td>Sistem Informasi Pelacakan Koruptor</td>
-                            <td>Lussy</td>
-                            <td><button class="btn btn-success">Diterima</button></td>
-                            <td>12-01-2019</td>
-                            <td>-</td>
-                            <td>
-                                <a href=""><button class="btn btn-warning">Edit</button></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Sistem Informasi Pencatatan Kepolisian</td>
-                            <td>Lussy</td>
-                            <td><button class="btn btn-danger">Ditolak</button></td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>
-                                <a href=""><button class="btn btn-warning">Edit</button></a>
-                            </td>
-                        </tr>
+                        @endforeach
+                       
                     </tbody>
                 </table>
             </div>

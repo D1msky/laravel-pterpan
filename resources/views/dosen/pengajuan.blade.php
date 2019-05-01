@@ -7,16 +7,15 @@
     </div>
 @endif
 @endsection
-
 @section('judul')
-<h1 class="h3 mb-0 text-gray-800">Users</h1>
+<h1 class="h3 mb-0 text-gray-800">Dosen</h1>
 @endsection
 @section('content')
 <!-- DataTales Example -->
 <div class="col-12">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary float-left">Data Users</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Data Dosen</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -25,17 +24,17 @@
                         <tr>
                             <th>Nama</th>
                             <th>Email</th>
-                            <th>Password</th>
-                            <th>Role</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($user as $data)
+                        @foreach($dosen as $data)
                         <tr>
-                            <td>{{$data->name}}</td>
+                            <td>{{$data->nama}}</td>
                             <td>{{$data->email}}</td>
-                            <td>{{$data->password}}</td>
-                            <td>{{$data->role}}</td>
+                            <td>
+                                <a href="/pengajuan/{{$data->id_dosen}}/detail"><button class="btn btn-warning">Detail Pengajuan</button></a>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('judul')
-<h1 class="h3 mb-0 text-gray-800">Mahasiswa</h1>
+<h1 class="h3 mb-0 text-gray-800">Pengajuan</h1>
 @endsection
 @section('content')
 <!-- Basic Card Example -->
@@ -9,7 +9,7 @@
 <div class="col-sm-7">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Edit Mahasiswa</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Edit Pengjuan</h6>
         </div>
         <div class="card-body">
             <form action="/mahasiswa/{{$mhs->id_mhs}}/update" method="POST" enctype="multipart/form-data">

@@ -1,5 +1,12 @@
 @extends('layouts.master')
 
+@section('alert')
+@if(session('sukses'))
+    <div class="alert alert-success" role="alert">
+    {{session('sukses')}}
+    </div>
+@endif
+@endsection
 @section('judul')
 <h1 class="h3 mb-0 text-gray-800">Dosen</h1>
 @endsection
@@ -19,6 +26,7 @@
                 <table id="dataTable" class="table table-bordered" width="100%" cellspacing="0">
                     <thead>
                         <tr>
+                            <th>Nama</th>
                             <th>Email</th>
                             <th>Password</th>
                             <th>Status</th>
@@ -26,24 +34,18 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($dosen as $data)
                         <tr>
-                            <td>Row 1 Data 1</td>
-                            <td>Row 1 Data 2</td>
-                            <td>Row 1 Data 2</td>
+                            <td>{{$data->nama}}</td>
+                            <td>{{$data->email}}</td>
+                            <td>{{$data->password}}</td>
+                            <td>{{$data->status}}</td>
                             <td>
-                                <a href=""><button class="btn btn-warning">Edit</button></a>
-                                <a href=""><button class="btn btn-danger">Delete</button></a>
+                                <a href="/dosen/{{$data->id_dosen}}/edit"><button class="btn btn-warning">Edit</button></a>
+                                <a href="/dosen/{{$data->id_dosen}}/delete"><button class="btn btn-danger">Delete</button></a>
                             </td>
                         </tr>
-                        <tr>
-                            <td>Row 2 Data 1</td>
-                            <td>Row 2 Data 2</td>
-                            <td>Row 1 Data 2</td>
-                            <td>
-                                <a href=""><button class="btn btn-warning">Edit</button></a>
-                                <a href=""><button class="btn btn-danger">Delete</button></a>
-                            </td>
-                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -63,20 +65,24 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form action="/dosen/create" method="POST" >
                     {{csrf_field()}}
                     <div class="form-group">
+                        <label for="exampleInputPassword1">Nama Dosen</label>
+                        <input name="nama" type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Nama">
+                    </div>
+                    <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                        <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
                         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Status</label>
-                        <select class="form-control" id="exampleFormControlSelect1">
+                        <select name="status" class="form-control" id="exampleFormControlSelect1">
                             <option>Dosen</option>
                             <option>Kaprodi</option>
                         </select>

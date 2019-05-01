@@ -28,6 +28,7 @@
                     <thead>
                         <tr>
                             <th>NIM</th>
+                            <th>Nama</th>
                             <th>Email</th>
                             <th>Password</th>
                             <th>Action</th>
@@ -37,6 +38,7 @@
                         @foreach($mhs as $data)
                         <tr>
                             <td>{{$data->nim}}</td>
+                            <td>{{$data->nama}}</td>
                             <td>{{$data->email}}</td>
                             <td>{{$data->password}}</td>
                             <td>
@@ -68,6 +70,10 @@
                     <div class="form-group">
                         <label for="exampleInputEmail1">NIM</label>
                         <input name="nim" type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter NIM">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Nama</label>
+                        <input name="nama" type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Nama">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>
