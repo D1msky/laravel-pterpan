@@ -16,12 +16,18 @@
 <div class="col-12">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Pengajuan Judul Skripsi {{$pengajuan[1]->dosen->nama}}</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Pengajuan Judul Skripsi</h6>
         </div>
         <div class="card-body">
-            <button type="button" class="btn btn-primary float-right btn-sm" data-toggle="modal" data-target="#exampleModal">
-                Tambah Pengajuan
-            </button>
+            @if(auth()->user()->role == "Mahasiswa")
+                @if(auth()->user()->mahasiswa->pengajuan)
+
+                @else
+                <button type="button" class="btn btn-primary float-right btn-sm" data-toggle="modal" data-target="#exampleModal">
+                    Tambah Pengajuan
+                </button>
+                @endif
+            @endif
             <br><br>
             <div class="table-responsive">
                 <table id="dataTable" class="table table-bordered" width="100%" cellspacing="0">
@@ -39,12 +45,21 @@
                         @foreach($pengajuan as $pengajuan)
                         <tr>
                             <td>{{$pengajuan->judul}}</td>
-                            <td>{{$pengajuan->id_dosen}}</td>
-                            <td><button class="btn btn-warning">{{$pengajuan->status}}</button></td>
+                            <td>{{$pengajuan->dosen->nama}}</td>
+                            <td>
+                                @if($pengajuan->status == "Diterima")
+                                    <button class="btn btn-success">{{$pengajuan->status}}</button>
+                                @elseif($pengajuan->status == "Diproses")
+                                    <button class="btn btn-warning">{{$pengajuan->status}}</button>
+                                @else
+                                    <button class="btn btn-danger">{{$pengajuan->status}}</button>
+                                @endif
+                            </td>
                             <td>{{$pengajuan->tgl_acc}}</td>
                             <td>{{$pengajuan->tgl_selesai}}</td>
                             <td>
                                 <a href="/pengajuan/{{$pengajuan->id_pengajuan}}/edit"><button class="btn btn-warning">Edit</button></a>
+                                <a href="/pengajuan/{{$pengajuan->id_pengajuan}}/detail"><button class="btn btn-success">Detail</button></a>
                             </td>
                         </tr>
                         @endforeach
@@ -67,20 +82,19 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form action="/pengajuan/create" method="POST">
                     {{csrf_field()}}
+                    <input name= "id_mhs" type="hidden" class="form-control" aria-describedby="emailHelp" value="{{auth()->user()->mahasiswa->id_mhs}}">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Judul Mahasiswa</label>
-                        <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Judul">
+                        <input name= "judul" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Judul">
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Pilih Dosen</label>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                            <option>Lussy</option>
-                            <option>Halim</option>
-                            <option>Argo</option>
-                            <option>Erick</option>
-                            <option>Katon</option>
+                        <select name="id_dosen" class="form-control" id="exampleFormControlSelect1">
+                            @foreach($dosen as $dosen)
+                            <option value="{{$dosen->id_dosen}}">{{$dosen->nama}}</option>
+                            @endforeach
                         </select>
                     </div>
             </div>

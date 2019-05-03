@@ -50,32 +50,30 @@
           <span>Dashboard</span></a>
       </li>
 
-      <!-- Divider -->
-      <hr class="sidebar-divider">
-
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Pengguna
-      </div>
-
        <!-- Nav Item - Dashboard -->
+       @if(auth()->user()->role == "Admin")
+       <!-- Divider -->
+      <hr class="sidebar-divider">
+       <!-- Heading -->
+        <div class="sidebar-heading">
+          Pengguna
+        </div>
        <li class="nav-item">
         <a class="nav-link" href="/mahasiswa">
           <i class="fas fa-fw fa-users"></i>
           <span>Mahasiswa</span></a>
       </li>
-
       <li class="nav-item">
         <a class="nav-link" href="/dosen">
           <i class="fas fa-fw fa-users"></i>
           <span>Dosen</span></a>
       </li>
-
       <li class="nav-item">
         <a class="nav-link" href="/users">
           <i class="fas fa-fw fa-users"></i>
           <span>Users</span></a>
       </li>
+      @endif
   
       <!-- Divider -->
       <hr class="sidebar-divider">
@@ -91,26 +89,14 @@
           <span>Pengajuan Skripsi</span></a>
       </li>
 
-      <!-- Nav Item - Skripsi -->
-      <li class="nav-item">
-        <a class="nav-link" href="/skripsi">
-          <i class="fas fa-fw fa-file"></i>
-          <span>Skripsi</span></a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="/catatan">
-          <i class="fas fa-fw fa-comment"></i>
-          <span>Catatan</span></a>
-      </li>
-
+      @if(auth()->user()->role == "Admin" or auth()->user()->role == "Kaprodi")
       <!-- Nav Item - Skripsi -->
       <li class="nav-item">
         <a class="nav-link" href="/statistik">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Statistik Skripsi</span></a>
       </li>
-
+      @endif
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
 
@@ -158,65 +144,47 @@
                 </form>
               </div>
             </li>
-
+            
             <!-- Nav Item - Alerts -->
             <li class="nav-item dropdown no-arrow mx-1">
               <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-bell fa-fw"></i>
                 <!-- Counter - Alerts -->
-                <span class="badge badge-danger badge-counter">3+</span>
+                <span class="badge badge-danger badge-counter">{{auth()->user()->notifikasi()->count()}}</span>
               </a>
               <!-- Dropdown - Alerts -->
               <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
                 <h6 class="dropdown-header">
-                  Alerts Center
+                  Notifikasi
                 </h6>
+                @foreach(auth()->user()->notifikasi as $notif)
                 <a class="dropdown-item d-flex align-items-center" href="#">
                   <div class="mr-3">
-                    <div class="icon-circle bg-primary">
-                      <i class="fas fa-file-alt text-white"></i>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="small text-gray-500">December 12, 2019</div>
-                    <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                  </div>
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <div class="mr-3">
+                    @if($notif->status == "Sukses")
                     <div class="icon-circle bg-success">
-                      <i class="fas fa-donate text-white"></i>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="small text-gray-500">December 7, 2019</div>
-                    $290.29 has been deposited into your account!
-                  </div>
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <div class="mr-3">
+                    @elseif($notif->status == "Ditolak")
+                    <div class="icon-circle bg-danger">
+                    @else
                     <div class="icon-circle bg-warning">
+                    @endif
                       <i class="fas fa-exclamation-triangle text-white"></i>
                     </div>
                   </div>
                   <div>
-                    <div class="small text-gray-500">December 2, 2019</div>
-                    Spending Alert: We've noticed unusually high spending for your account.
+                    <div class="small text-gray-500">{{$notif->created_at}}</div>
+                    {{$notif->pesan}}
                   </div>
                 </a>
-                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                @endforeach
               </div>
             </li>
-
-           
-
             <div class="topbar-divider d-none d-sm-block"></div>
-
+            
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
-                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{auth()->user()->name}}</span>
+                <img class="img-profile rounded-circle" src="https://image.flaticon.com/icons/svg/332/332783.svg">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -299,7 +267,7 @@
 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
 <div class="modal-footer">
 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-<a class="btn btn-primary" href="login.html">Logout</a>
+<a class="btn btn-primary" href="/logout">Logout</a>
 </div>
 </div>
 </div>

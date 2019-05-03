@@ -40,6 +40,11 @@
                 <div class="p-5">
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                    @if(session('gagal'))
+                        <div class="alert alert-danger" role="alert">
+                        {{session('gagal')}}
+                        </div>
+                    @endif
                   </div>
                   <form action="/auth" class="user" method="POST">
                   {{csrf_field()}}

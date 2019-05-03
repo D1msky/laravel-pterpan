@@ -11,9 +11,11 @@
             <h6 class="m-0 font-weight-bold text-primary">Catatan Dosen</h6>
         </div>
         <div class="card-body">
+            @if(auth()->user()->role == "Dosen")
             <button type="button" class="btn btn-primary float-right btn-sm" data-toggle="modal" data-target="#exampleModal">
                 Tambah Catatan
             </button>
+            @endif
             <br><br>
             <div class="table-responsive">
                 <table id="dataTable" class="table table-bordered" width="100%" cellspacing="0">
@@ -21,26 +23,22 @@
                         <tr>
                             <th>Bab</th>
                             <th>Catatan</th>
+                            <th>Tanggal</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($catatan as $catatan)
                         <tr>
-                            <td>Bab 1</td>
-                            <td>Bagus</td>
+                            <td>{{$catatan->skripsi->judul}}</td>
+                            <td>{{$catatan->catatan}}</td>
+                            <td>{{$catatan->created_at}}</td>
                             <td>
                                 <a href=""><button class="btn btn-warning">Edit</button></a>
                                 <a href=""><button class="btn btn-danger">Delete</button></a>
                             </td>
                         </tr>
-                        <tr>
-                            <td>Row 2 Data 1</td>
-                            <td>Row 2 Data 2</td>
-                            <td>
-                                <a href=""><button class="btn btn-warning">Edit</button></a>
-                                <a href=""><button class="btn btn-danger">Delete</button></a>
-                            </td>
-                        </tr>
+                      @endforeach
                     </tbody>
                 </table>
             </div>
@@ -59,7 +57,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form action="/detail_skripsi/create" method="POST">
                     {{csrf_field()}}
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Pilih Bab</label>

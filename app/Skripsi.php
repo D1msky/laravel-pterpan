@@ -8,5 +8,5 @@ class Skripsi extends Model
 {
     protected $table = 'skripsi';
     protected $primaryKey = 'id_skripsi';
-    protected $fillable = ['id_dtl','judul','file','tgl_awal','tgl_akhir','status'];
+    protected $fillable = ['judul','file','tgl_awal','tgl_akhir','status'];
 }

@@ -14,12 +14,6 @@ class DosenController extends Controller
         return view('dosen.index',['dosen' => $dosen]);
     }
 
-    public function pengajuan()
-    {
-        $dosen = Dosen::all();
-        return view('dosen.pengajuan',['dosen' => $dosen]);
-    }
-
     public function create(Request $request)
     {
         //dd($request);

@@ -11,8 +11,9 @@ class SkripsiController extends Controller
         return view('skripsi.index');
     }
     
-    public function catatan()
+    public function detail($id_pengajuan)
     {
-        return view('skripsi.catatan');
+        $skripsi = \App\Skripsi::where('id_pengajuan',$id_pengajuan)->get();
+        return view('skripsi.index',['skripsi' => $skripsi]);
     }
 }
