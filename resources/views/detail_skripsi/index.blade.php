@@ -1,5 +1,12 @@
 @extends('layouts.master')
 
+@section('alert')
+@if(session('sukses'))
+    <div class="alert alert-success" role="alert">
+    {{session('sukses')}}
+    </div>
+@endif
+@endsection
 @section('judul')
 <h1 class="h3 mb-0 text-gray-800">Catatan Dosen</h1>
 @endsection
@@ -24,7 +31,9 @@
                             <th>Bab</th>
                             <th>Catatan</th>
                             <th>Tanggal</th>
+                            @if(auth()->user()->role = "Dosen")
                             <th>Action</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -33,10 +42,12 @@
                             <td>{{$catatan->skripsi->judul}}</td>
                             <td>{{$catatan->catatan}}</td>
                             <td>{{$catatan->created_at}}</td>
+                            @if(auth()->user()->role = "Dosen")
                             <td>
-                                <a href=""><button class="btn btn-warning">Edit</button></a>
-                                <a href=""><button class="btn btn-danger">Delete</button></a>
+                                <a href="/detail_skripsi/({$catatan->id_dtl})/edit"><button class="btn btn-warning">Edit</button></a>
+                                <a href="/detail_skripsi/({$catatan->id_dtl})/edit"><button class="btn btn-danger">Delete</button></a>
                             </td>
+                            @endif
                         </tr>
                       @endforeach
                     </tbody>
@@ -51,7 +62,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Mahasiswa</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Catatan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -60,14 +71,8 @@
                 <form action="/detail_skripsi/create" method="POST">
                     {{csrf_field()}}
                     <div class="form-group">
-                        <label for="exampleFormControlSelect1">Pilih Bab</label>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                            <option>Bab 1</option>
-                            <option>Bab 2</option>
-                            <option>Bab 3</option>
-                            <option>Bab 4</option>
-                            <option>Bab 5</option>
-                        </select>
+                        <label for="exampleInputEmail1">Nama</label>
+                        <input name="id_skripsi" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Nama" value="{{$catatan->id_skripsi}}" hidden>
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1">Catatan</label>

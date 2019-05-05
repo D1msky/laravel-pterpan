@@ -8,5 +8,10 @@ class Skripsi extends Model
 {
     protected $table = 'skripsi';
     protected $primaryKey = 'id_skripsi';
-    protected $fillable = ['judul','file','tgl_awal','tgl_akhir','status'];
+    protected $fillable = ['judul','file','tgl_awal','tgl_akhir','status','id_pengajuan'];
+
+    public function pengajuan()
+    {
+        return $this->belongsTo('\App\Pengajuan','id_pengajuan');
+    }
 }

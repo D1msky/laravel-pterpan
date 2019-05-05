@@ -34,14 +34,26 @@ Route::group(['middleware' => ['auth','checkRole:Admin,Kaprodi']],function(){
     Route::get('/statistik', 'PengajuanController@statistik');
 });
 
+Route::group(['middleware' => ['auth','checkRole:Dosen']],function(){
+    Route::post('/detail_skripsi/create','Detail_SkripsiController@create');
+});
+
 Route::group(['middleware' => ['auth','checkRole:Admin,Dosen,Mahasiswa']],function(){
     Route::get('/pengajuan' ,'PengajuanController@index');
-    Route::get('/pengajuan/{id_pengajuan}/detail', 'SkripsiController@detail');
+    Route::get('/pengajuan/{id_pengajuan}/detail', 'SkripsiController@index');
     Route::post('/pengajuan/create' ,'PengajuanController@create');
+    Route::get('/pengajuan/{id_pengajuan}/edit','PengajuanController@edit');
+    Route::post('/pengajuan/{id_pengajuan}/update','PengajuanController@update');
 
     Route::get('/skripsi','SkripsiController@index');
-    Route::get('/skripsi/{id_skripsi}/catatan', 'Detail_SkripsiController@index');
-    Route::post('/detail_skripsi/create','Detail_SkripsiController@create');
+    Route::get('/detail_skripsi/{id_skripsi}', 'Detail_SkripsiController@index');
+    
+    Route::get('/detail_skripsi/{id_dtl}/edit','Detail_SkripsiController@edit');
+    Route::post('/detail_skripsi/{id_dtl}/update','Detail_SkripsiController@update');
+    Route::get('/detail_skripsi/{id_dtl}/delete','Detail_SkripsiController@delete');
+
+
+    Route::get('/notifikasi','NotifikasiController@index');
     Route::get('/logout','AuthController@logout');
 });
 

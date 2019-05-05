@@ -8,9 +8,16 @@
     <div class="inner">
       <h3 class="masthead-brand">Sistem Pengajuan Skripsi</h3>
       <nav class="nav nav-masthead justify-content-center">
-        <a class="nav-link active" href="#">Home</a>
-        <a class="nav-link" href="#">Features</a>
-        <a class="nav-link" href="#">Contact</a>
+        <a class="nav-link active" href="/">Home</a>
+        @if(auth()->user())
+          @if(auth()->user()->role == "Admin")
+          <a class="nav-link" href="/mahasiswa">Dashboard</a>
+          @elseif(auth()->user()->role = "Dosen" or auth()->user()->role == "Kaprodi" or auth()->user()->role == "Mahasiswa")
+          <a class="nav-link" href="/pengajuan">Dashboard</a>
+          @endif
+        @else
+        <a class="nav-link" href="/login">Login</a>
+        @endif
       </nav>
     </div>
   </header>

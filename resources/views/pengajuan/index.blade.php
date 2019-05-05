@@ -34,7 +34,11 @@
                     <thead>
                         <tr>
                             <th>Judul Skripsi</th>
-                            <th>Dosen</th>
+                            @if(auth()->user()->role == "Dosen")
+                            <th>Nama Mahasiswa</th>
+                            @else
+                            <th>Nama Dosen</th>
+                            @endif
                             <th>Status</th>
                             <th>Tgl Acc</th>
                             <th>Tgl Selesai</th>
@@ -45,7 +49,11 @@
                         @foreach($pengajuan as $pengajuan)
                         <tr>
                             <td>{{$pengajuan->judul}}</td>
+                            @if(auth()->user()->role == "Dosen")
+                            <td>{{$pengajuan->mahasiswa->nama}}</td>
+                            @else
                             <td>{{$pengajuan->dosen->nama}}</td>
+                            @endif
                             <td>
                                 @if($pengajuan->status == "Diterima")
                                     <button class="btn btn-success">{{$pengajuan->status}}</button>
@@ -59,7 +67,9 @@
                             <td>{{$pengajuan->tgl_selesai}}</td>
                             <td>
                                 <a href="/pengajuan/{{$pengajuan->id_pengajuan}}/edit"><button class="btn btn-warning">Edit</button></a>
+                                @if($pengajuan->skripsi()->count() > 0)
                                 <a href="/pengajuan/{{$pengajuan->id_pengajuan}}/detail"><button class="btn btn-success">Detail</button></a>
+                                @endif
                             </td>
                         </tr>
                         @endforeach
@@ -76,7 +86,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Dosen</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Pengajuan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -84,7 +94,9 @@
             <div class="modal-body">
                 <form action="/pengajuan/create" method="POST">
                     {{csrf_field()}}
+                    @if(auth()->user()->role == "Mahasiswa")
                     <input name= "id_mhs" type="hidden" class="form-control" aria-describedby="emailHelp" value="{{auth()->user()->mahasiswa->id_mhs}}">
+                    @endif
                     <div class="form-group">
                         <label for="exampleInputEmail1">Judul Mahasiswa</label>
                         <input name= "judul" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Judul">

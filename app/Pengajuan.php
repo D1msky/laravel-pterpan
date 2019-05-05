@@ -8,7 +8,7 @@ class Pengajuan extends Model
 {
     protected $table = 'Pengajuan';
     protected $primaryKey = 'id_pengajuan';
-    protected $fillable = ['id_dosen','id_mhs','status','tgl_acc','tgl_selesai'];
+    protected $fillable = ['id_dosen','id_mhs','status','tgl_acc','tgl_selesai','judul'];
 
     public function dosen()
     {
@@ -18,5 +18,10 @@ class Pengajuan extends Model
     public function mahasiswa()
     {
         return $this->belongsTo('\App\Mahasiswa','id_mhs');
+    }
+
+    public function skripsi()
+    {
+        return $this->hasMany('\App\Skripsi','id_pengajuan');
     }
 }

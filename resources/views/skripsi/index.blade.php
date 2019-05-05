@@ -1,5 +1,12 @@
 @extends('layouts.master')
 
+@section('alert')
+@if(session('sukses'))
+    <div class="alert alert-success" role="alert">
+    {{session('sukses')}}
+    </div>
+@endif
+@endsection
 @section('judul')
 <h1 class="h3 mb-0 text-gray-800">Skripsi</h1>
 @endsection
@@ -30,7 +37,7 @@
                             <td>
                                 @if($skripsi->status == "Diterima")
                                     <button class="btn btn-success">{{$skripsi->status}}</button>
-                                @elseif($pengajuan->status == "Diproses")
+                                @elseif($skripsi->status == "Diproses")
                                     <button class="btn btn-warning">{{$skripsi->status}}</button>
                                 @else
                                     <button class="btn btn-danger">{{$skripsi->status}}</button>
@@ -45,7 +52,7 @@
                             </td>
                             <td>
                                 <a href="/skripsi/edit"><button class="btn btn-warning">Edit</button></a>
-                                <a href="/skripsi/{{$skripsi->id_skripsi}}/catatan"><button class="btn btn-success">Detail</button></a>
+                                <a href="/detail_skripsi/{{$skripsi->id_skripsi}}"><button class="btn btn-success">Detail</button></a>
                             </td>
                         </tr>
                         @endforeach

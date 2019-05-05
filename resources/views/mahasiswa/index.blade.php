@@ -69,11 +69,11 @@
                     {{csrf_field()}}
                     <div class="form-group">
                         <label for="exampleInputEmail1">NIM</label>
-                        <input name="nim" type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter NIM">
+                        <input name="nim" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter NIM">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Nama</label>
-                        <input name="nama" type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Nama">
+                        <input name="nama" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Nama">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>

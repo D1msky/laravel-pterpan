@@ -150,7 +150,15 @@
               <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-bell fa-fw"></i>
                 <!-- Counter - Alerts -->
-                <span class="badge badge-danger badge-counter">{{auth()->user()->notifikasi()->count()}}</span>
+                
+                <span class="badge badge-danger badge-counter">
+                  @foreach(auth()->user()->notifikasi as $tmp => $notif)
+                    @if($notif->dibaca == 0)
+                      <?php $tmp++; ?> 
+                    @endif
+                  @endforeach
+                  {{$tmp}}
+                </span>
               </a>
               <!-- Dropdown - Alerts -->
               <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
@@ -158,7 +166,8 @@
                   Notifikasi
                 </h6>
                 @foreach(auth()->user()->notifikasi as $notif)
-                <a class="dropdown-item d-flex align-items-center" href="#">
+                @if($notif->dibaca == 0)
+                <a class="dropdown-item d-flex align-items-center" href="/notifikasi">
                   <div class="mr-3">
                     @if($notif->status == "Sukses")
                     <div class="icon-circle bg-success">
@@ -175,6 +184,7 @@
                     {{$notif->pesan}}
                   </div>
                 </a>
+                @endif
                 @endforeach
               </div>
             </li>
