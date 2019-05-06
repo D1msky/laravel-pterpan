@@ -152,6 +152,7 @@
                 <!-- Counter - Alerts -->
                 
                 <span class="badge badge-danger badge-counter">
+                <?php $tmp=0; ?>
                   @foreach(auth()->user()->notifikasi as $tmp => $notif)
                     @if($notif->dibaca == 0)
                       <?php $tmp++; ?> 

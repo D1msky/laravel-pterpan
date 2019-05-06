@@ -8,8 +8,9 @@ class Detail_SkripsiController extends Controller
 {
     public function index($id_skripsi)
     {
+        //dd($id_skripsi);
         $catatan = \App\Detail_Skripsi::where('id_skripsi',$id_skripsi)->get();
-        return view('detail_skripsi.index',['catatan' => $catatan]);
+        return view('detail_skripsi.index',['catatan' => $catatan,'id_skripsi' => $id_skripsi]);
     }
 
     public function create(Request $request)
@@ -21,12 +22,16 @@ class Detail_SkripsiController extends Controller
 
     public function edit($id_dtl)
     {
-        
+        $detail = \App\Detail_Skripsi::find($id_dtl);
+        return view('detail_skripsi.edit',['detail' => $detail]);
     }
 
-    public function update(Request $request,$id_dtl)
+    public function update(Request $request)
     {
-        # code...
+        $detail = \App\Detail_Skripsi::find($request->id_dtl);
+        $id_skripsi = '/detail_skripsi/'.$request->id_skripsi;
+        $detail->update($request->all());
+        return redirect($id_skripsi)->with('sukses','Data Catatan Berhasil Diupdate!');
     }
 
     public function delete($id_dtl)

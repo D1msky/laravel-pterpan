@@ -14,4 +14,9 @@ class Skripsi extends Model
     {
         return $this->belongsTo('\App\Pengajuan','id_pengajuan');
     }
+
+    public function detail_skripsi()
+    {
+        return $this->hasMany('\App\Detail_Skripsi','id_skripsi');
+    }
 }

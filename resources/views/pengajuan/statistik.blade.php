@@ -20,29 +20,32 @@
         <!-- Card Content - Collapse -->
         <div class="collapse show" id="collapseCardExample1">
             <div class="card-body">
+            <form action="/pengajuan/filter" method="POST">
+            {{csrf_field()}}
                 <div class="from-group row">
                         <label for="datepicker" class="col-sm-2 col-form-label">Tanggal Awal</label>
-                        <div class="col-sm-3">
-                            <input id="datepicker" width="276" />
-                            <script>
-                                $('#datepicker').datepicker({
-                                    uiLibrary: 'bootstrap4'
-                                });
-                            </script>
-                        </div>
-                        <label for="datepicker" class="col-sm-2 col-form-label">Tanggal Awal</label>
-                        <div class="col-sm-3">
-                            <input id="datepicker1" width="276" />
-                            <script>
-                                $('#datepicker1').datepicker({
-                                    uiLibrary: 'bootstrap4'
-                                });
-                            </script>
-                        </div>
-                    <div class="col-sm-2">
-                        <button class="btn btn-primary btn-md">Submit</button>
-                    </div>
+                            <div class="col-sm-3">
+                                <input name="tgl1" id="datepicker" width="276" />
+                                <script>
+                                    $('#datepicker').datepicker({
+                                        uiLibrary: 'bootstrap4'
+                                    });
+                                </script>
+                            </div>
+                            <label for="datepicker" class="col-sm-2 col-form-label">Tanggal Awal</label>
+                            <div class="col-sm-3">
+                                <input name="tgl2" id="datepicker1" width="276" />
+                                <script>
+                                    $('#datepicker1').datepicker({
+                                        uiLibrary: 'bootstrap4'
+                                    });
+                                </script>
+                            </div>
+                        <div class="col-sm-2">
+                            <button class="btn btn-primary btn-md">Submit</button>
+                        </div>                    
                 </div>
+                </form>
             </div>
         </div>
     </div>
@@ -105,7 +108,9 @@
     var myLineChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: ["72160021", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            labels:    
+                     {!!$nim!!}
+                ,
             datasets: [{
                 label: "Earnings ",
                 lineTension: 0.3,
@@ -119,7 +124,9 @@
                 pointHoverBorderColor: "rgba(78, 115, 223, 1)",
                 pointHitRadius: 10,
                 pointBorderWidth: 2,
-                data: [0, 10, 20, 30, 15, 11, 18, 25, 20, 28, 25, 17],
+                data: 
+                     {!!$lama!!}
+                ,
             }],
         },
         options: {

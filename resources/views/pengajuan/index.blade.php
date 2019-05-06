@@ -1,6 +1,5 @@
 @extends('layouts.master')
 
-
 @section('alert')
 @if(session('sukses'))
     <div class="alert alert-success" role="alert">
@@ -68,7 +67,7 @@
                             <td>
                                 <a href="/pengajuan/{{$pengajuan->id_pengajuan}}/edit"><button class="btn btn-warning">Edit</button></a>
                                 @if($pengajuan->skripsi()->count() > 0)
-                                <a href="/pengajuan/{{$pengajuan->id_pengajuan}}/detail"><button class="btn btn-success">Detail</button></a>
+                                <a href="/skripsi/{{$pengajuan->id_pengajuan}}"><button class="btn btn-success">Detail</button></a>
                                 @endif
                             </td>
                         </tr>

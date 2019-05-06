@@ -40,16 +40,22 @@ Route::group(['middleware' => ['auth','checkRole:Dosen']],function(){
 
 Route::group(['middleware' => ['auth','checkRole:Admin,Dosen,Mahasiswa']],function(){
     Route::get('/pengajuan' ,'PengajuanController@index');
-    Route::get('/pengajuan/{id_pengajuan}/detail', 'SkripsiController@index');
+    
     Route::post('/pengajuan/create' ,'PengajuanController@create');
     Route::get('/pengajuan/{id_pengajuan}/edit','PengajuanController@edit');
     Route::post('/pengajuan/{id_pengajuan}/update','PengajuanController@update');
+    Route::post('/pengajuan/filter','PengajuanController@filter');
 
+
+    Route::get('/skripsi/{id_pengajuan}', 'SkripsiController@index');
+    Route::get('/skripsi/download/{file}','SkripsiController@download');
     Route::get('/skripsi','SkripsiController@index');
+    Route::get('/skripsi/{id_skripsi}/edit','SkripsiController@edit');
+    Route::post('/skripsi/{id_skripsi}/update','SkripsiController@update');
     Route::get('/detail_skripsi/{id_skripsi}', 'Detail_SkripsiController@index');
     
     Route::get('/detail_skripsi/{id_dtl}/edit','Detail_SkripsiController@edit');
-    Route::post('/detail_skripsi/{id_dtl}/update','Detail_SkripsiController@update');
+    Route::post('/detail_skripsi/update','Detail_SkripsiController@update');
     Route::get('/detail_skripsi/{id_dtl}/delete','Detail_SkripsiController@delete');
 
 

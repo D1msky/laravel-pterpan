@@ -23,7 +23,8 @@
                     <thead>
                         <tr>
                             <th>Bab</th>
-                            <th>Tanggal</th>
+                            <th>Tanggal Awal</th>
+                            <th>Tanggal Akhir</th>
                             <th>Status</th>
                             <th>File</th>
                             <th>Aksi</th>
@@ -33,7 +34,8 @@
                         @foreach($skripsi as $skripsi)
                         <tr>
                             <td>{{$skripsi->judul}}</td>
-                            <td>{{$skripsi->created_at}}</td>
+                            <td>{{$skripsi->tgl_awal}}</td>
+                            <td>{{$skripsi->tgl_akhir}}</td>
                             <td>
                                 @if($skripsi->status == "Diterima")
                                     <button class="btn btn-success">{{$skripsi->status}}</button>
@@ -45,13 +47,13 @@
                             </td>
                             <td>
                                 @if($skripsi->file)
-                                <a href="{{$skripsi->file}}">Download File</a>
+                                <a href="/skripsi/download/{{$skripsi->file}}">Download File</a>
                                 @else
                                 <a href="#">File Tidak Tersedia</a>
                                 @endif
                             </td>
                             <td>
-                                <a href="/skripsi/edit"><button class="btn btn-warning">Edit</button></a>
+                                <a href="/skripsi/{{$skripsi->id_skripsi}}/edit"><button class="btn btn-warning">Edit</button></a>
                                 <a href="/detail_skripsi/{{$skripsi->id_skripsi}}"><button class="btn btn-success">Detail</button></a>
                             </td>
                         </tr>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class PengajuanController extends Controller
 {
@@ -66,6 +67,36 @@ class PengajuanController extends Controller
 
     public function statistik()
     {
-        return view('pengajuan.statistik');
+        $statistik = \App\Pengajuan::whereNotNull('tgl_selesai')->get();
+
+        $nim = [];
+        $lama = [];
+        foreach($statistik as $stk){
+            $nim[] = $stk->mahasiswa->nim;
+            $tgl1 = Carbon::parse($stk->tgl_selesai);
+            $tgl2 = Carbon::parse($stk->tgl_acc);
+          
+            $lama[] = $tgl1->diffInMonths($tgl2);
+        }
+        //dd(json_encode($lama));
+        return view('pengajuan.statistik',['statistik' => $statistik,'nim' => json_encode($nim),'lama' => json_encode($lama)]);
+    }
+
+    public function filter(Request $request)
+    {
+        //dd($request->tgl2);
+        $statistik = \App\Pengajuan::where('tgl_selesai','>',date('Y-m-d', strtotime($request->tgl1)))->where('tgl_selesai', '<' ,date('Y-m-d', strtotime($request->tgl2)))->get();
+
+        $nim = [];
+        $lama = [];
+        foreach($statistik as $stk){
+            $nim[] = $stk->mahasiswa->nim;
+            $tgl1 = Carbon::parse($stk->tgl_selesai);
+            $tgl2 = Carbon::parse($stk->tgl_acc);
+          
+            $lama[] = $tgl1->diffInMonths($tgl2);
+        }
+        //dd(json_encode($lama));
+        return view('pengajuan.statistik',['statistik' => $statistik,'nim' => json_encode($nim),'lama' => json_encode($lama)]);
     }
 }

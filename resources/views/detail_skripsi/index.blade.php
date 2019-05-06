@@ -31,7 +31,7 @@
                             <th>Bab</th>
                             <th>Catatan</th>
                             <th>Tanggal</th>
-                            @if(auth()->user()->role = "Dosen")
+                            @if(auth()->user()->role == "Dosen")
                             <th>Action</th>
                             @endif
                         </tr>
@@ -42,10 +42,10 @@
                             <td>{{$catatan->skripsi->judul}}</td>
                             <td>{{$catatan->catatan}}</td>
                             <td>{{$catatan->created_at}}</td>
-                            @if(auth()->user()->role = "Dosen")
+                            @if(auth()->user()->role == "Dosen")
                             <td>
-                                <a href="/detail_skripsi/({$catatan->id_dtl})/edit"><button class="btn btn-warning">Edit</button></a>
-                                <a href="/detail_skripsi/({$catatan->id_dtl})/edit"><button class="btn btn-danger">Delete</button></a>
+                                <a href="/detail_skripsi/{{$catatan->id_dtl}}/edit"><button class="btn btn-warning">Edit</button></a>
+                                <a href="/detail_skripsi/{{$catatan->id_dtl}}/delete"><button class="btn btn-danger">Delete</button></a>
                             </td>
                             @endif
                         </tr>
@@ -71,12 +71,11 @@
                 <form action="/detail_skripsi/create" method="POST">
                     {{csrf_field()}}
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Nama</label>
-                        <input name="id_skripsi" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Nama" value="{{$catatan->id_skripsi}}" hidden>
+                        <input name="id_skripsi" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Nama" value="{{$id_skripsi}}" hidden>
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1">Catatan</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <textarea name="catatan" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                     </div>
             </div>
             <div class="modal-footer">
