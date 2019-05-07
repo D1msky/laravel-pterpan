@@ -48,6 +48,15 @@ class SkripsiController extends Controller
             }
         }else{
             $skripsi->update($request->all());
+            /*if($request->status){
+                $skripsi->status = $request->status;
+                $skripsi->tgl_awal = $request->tgl_awal;
+                $skripsi->tgl_akhir = $request->tgl_akhir;
+            }else{
+                $skripsi->tgl_awal = $request->tgl_awal;
+                $skripsi->tgl_akhir = $request->tgl_akhir;
+            }
+            $skripsi->save();*/
         }
     
 
