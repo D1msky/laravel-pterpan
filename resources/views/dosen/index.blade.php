@@ -83,8 +83,8 @@
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Status</label>
                         <select name="status" class="form-control" id="exampleFormControlSelect1">
-                            <option>Dosen</option>
-                            <option>Kaprodi</option>
+                            <option value="Dosen">Dosen</option>
+                            <option value="Kaprodi">Kaprodi</option>
                         </select>
                     </div>
                 
