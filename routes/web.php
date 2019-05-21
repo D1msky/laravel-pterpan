@@ -60,6 +60,8 @@ Route::group(['middleware' => ['auth','checkRole:Admin,Dosen,Mahasiswa']],functi
 
 
     Route::get('/notifikasi','NotifikasiController@index');
+});
+Route::group(['middleware' => ['auth','checkRole:Admin,Dosen,Mahasiswa,Kaprodi']],function(){
     Route::get('/logout','AuthController@logout');
 });
 

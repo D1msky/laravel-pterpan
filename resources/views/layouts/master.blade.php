@@ -73,10 +73,9 @@
           <i class="fas fa-fw fa-users"></i>
           <span>Users</span></a>
       </li>
-      @endif
-  
-      <!-- Divider -->
-      <hr class="sidebar-divider">
+
+       <!-- Divider -->
+       <hr class="sidebar-divider">
 
       <!-- Heading -->
       <div class="sidebar-heading">
@@ -88,6 +87,9 @@
           <i class="fas fa-fw fa-check"></i>
           <span>Pengajuan Skripsi</span></a>
       </li>
+      @endif
+  
+     
 
       @if(auth()->user()->role == "Admin" or auth()->user()->role == "Kaprodi")
       <!-- Nav Item - Skripsi -->
