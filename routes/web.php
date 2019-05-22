@@ -36,6 +36,7 @@ Route::group(['middleware' => ['auth','checkRole:Admin,Kaprodi']],function(){
 
 Route::group(['middleware' => ['auth','checkRole:Dosen']],function(){
     Route::post('/detail_skripsi/create','Detail_SkripsiController@create');
+    Route::post('/pengajuan/filter','PengajuanController@filter');
 });
 
 Route::group(['middleware' => ['auth','checkRole:Admin,Dosen,Mahasiswa']],function(){
@@ -44,7 +45,7 @@ Route::group(['middleware' => ['auth','checkRole:Admin,Dosen,Mahasiswa']],functi
     Route::post('/pengajuan/create' ,'PengajuanController@create');
     Route::get('/pengajuan/{id_pengajuan}/edit','PengajuanController@edit');
     Route::post('/pengajuan/{id_pengajuan}/update','PengajuanController@update');
-    Route::post('/pengajuan/filter','PengajuanController@filter');
+    
 
 
     Route::get('/skripsi/{id_pengajuan}', 'SkripsiController@index');
