@@ -59,6 +59,7 @@ class PengajuanController extends Controller
             }
         }elseif($request->status == "Ditolak"){
             $notifikasi = \App\Notifikasi::create(['pesan' => 'Pengajuan Ditolak', 'status' => 'Ditolak', 'user_id' => $pengajuan->mahasiswa->user_id]);
+            
         }
         $pengajuan->update($request->all());
 

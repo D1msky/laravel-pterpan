@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Symfony\Component\VarDumper\Caster\RedisCaster;
+use App\Pengajuan;
 
 class SkripsiController extends Controller
 {
@@ -47,6 +48,12 @@ class SkripsiController extends Controller
                 $skripsi->save();
             }
         }else{
+           
+           
+            if(auth()->user()->role == 'Mahasiswa' && $skripsi->status == 'Ditolak'){
+                $request->request->add(['status' => 'Diproses']);
+                
+            }
             $skripsi->update($request->all());
             /*if($request->status){
                 $skripsi->status = $request->status;
