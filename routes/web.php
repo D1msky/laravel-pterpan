@@ -32,11 +32,11 @@ Route::group(['middleware' => ['auth','checkRole:Admin']],function(){
 
 Route::group(['middleware' => ['auth','checkRole:Admin,Kaprodi']],function(){
     Route::get('/statistik', 'PengajuanController@statistik');
+    Route::post('/pengajuan/filter','PengajuanController@filter');
 });
 
 Route::group(['middleware' => ['auth','checkRole:Dosen']],function(){
     Route::post('/detail_skripsi/create','Detail_SkripsiController@create');
-    Route::post('/pengajuan/filter','PengajuanController@filter');
 });
 
 Route::group(['middleware' => ['auth','checkRole:Admin,Dosen,Mahasiswa']],function(){
